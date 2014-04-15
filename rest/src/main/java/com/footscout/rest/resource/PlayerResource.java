@@ -9,7 +9,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.footscout.rest.db.PlayerDAO;
-import com.footscout.rest.model.PlayerStat;
+import com.footscout.rest.model.Player;
 
 @Path("/players")
 public class PlayerResource {
@@ -19,14 +19,14 @@ public class PlayerResource {
 	@GET
 //	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	@Produces(MediaType.APPLICATION_XML)
-	public List<PlayerStat> findAll(){
-		return dao.findAllPlayerStat();
+	public List<Player> findAll(){
+		return dao.findAll();
 	}
 	
 	@GET @Path("{id}")
 	@Produces({MediaType.APPLICATION_XML})
-	public PlayerStat findStatById(@PathParam("id") String id){
-		return dao.findStatById(Integer.parseInt(id));
+	public Player findStatById(@PathParam("id") String id){
+		return dao.findById(Integer.parseInt(id));
 	} 
 	
 	@GET @Path("/abc")

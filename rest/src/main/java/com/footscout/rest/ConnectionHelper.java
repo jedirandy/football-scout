@@ -15,9 +15,9 @@ public class ConnectionHelper {
 		String driver = null;
 		url = "";
 		try{
-			Class.forName("com.mysql.jdbc.Driver");
 			ResourceBundle bundle = ResourceBundle.getBundle("DBConfig");
 			driver = bundle.getString("jdbc.driver");
+			Class.forName(driver);
 			url = bundle.getString("jdbc.url");
 			user = bundle.getString("jdbc.user");
 			password = bundle.getString("jdbc.password");

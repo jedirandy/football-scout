@@ -10,53 +10,11 @@ import java.util.List;
 
 import com.footscout.rest.ConnectionHelper;
 import com.footscout.rest.model.Player;
-import com.footscout.rest.model.PlayerStat;
 
 public class PlayerDAO {
 	
 	public List<Player> findAll(){
 		List<Player> list = new ArrayList<Player>();
-		Connection c = null;
-		String query = "SELECT * FROM player";
-		try{
-			c = ConnectionHelper.getConnection();
-			Statement s = c.createStatement();
-			ResultSet rs = s.executeQuery(query);
-			while(rs.next()){
-				list.add(processPlayer(rs));
-			}
-		}catch(SQLException e){
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		}finally{
-			ConnectionHelper.close(c);
-		}
-		return list;
-	}
-	
-	public Player findById(int id){
-		String query = "SELECT * FROM player WHERE id = ?";
-		Player player = null;
-		Connection c = null;
-		try{
-			c = ConnectionHelper.getConnection();
-			PreparedStatement ps = c.prepareStatement(query);
-			ps.setInt(1, id);
-			ResultSet rs = ps.executeQuery();
-			if(rs.next()){
-				player = processPlayer(rs);
-			}
-		}catch(Exception e){
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		}finally{
-			ConnectionHelper.close(c);
-		}
-		return player;
-	}
-	
-	public List<PlayerStat> findAllPlayerStat(){
-		List<PlayerStat> list = new ArrayList<PlayerStat>();
 		Connection c = null;
 		String query = "SELECT * FROM player_stat";
 		try{
@@ -75,9 +33,9 @@ public class PlayerDAO {
 		return list;
 	}
 	
-	public PlayerStat findStatById(int id){
+	public Player findById(int id){
 		String query = "SELECT * FROM player_stat WHERE player_id = ?";
-		PlayerStat playerStat = null;
+		Player playerStat = null;
 		Connection c = null;
 		try{
 			c = ConnectionHelper.getConnection();
@@ -96,16 +54,8 @@ public class PlayerDAO {
 		return playerStat;
 	}
 	
-	protected Player processPlayer(ResultSet rs) throws SQLException{
-		Player player = new Player();
-		player.setId(rs.getInt("player_id"));
-		player.setName(rs.getString("player_name"));
-		player.setTeamId(rs.getInt("team_id"));
-		return player;
-	}
-	
-	protected PlayerStat processPlayerStat(ResultSet rs) throws SQLException{
-		PlayerStat playerStat = new PlayerStat();
+	protected Player processPlayerStat(ResultSet rs) throws SQLException{
+		Player playerStat = new Player();
 		playerStat.setPlayerId(rs.getInt("player_id"));
 		playerStat.setTeamId(rs.getInt("team_id"));
 		playerStat.setPlayerName(rs.getString("player_name"));
