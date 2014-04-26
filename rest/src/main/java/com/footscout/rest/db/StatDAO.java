@@ -3,7 +3,6 @@ package com.footscout.rest.db;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -60,10 +59,4 @@ public class StatDAO {
 		return list;
 	}
 
-	protected Stat processStat(ResultSet rs) throws SQLException {
-		Stat stat = new Stat();
-		stat.setAerialDuelWon(rs.getDouble("aerial_duel_won"));
-		Class<Stat> c = Stat.class;
-		return stat;
-	}
 }

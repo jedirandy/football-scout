@@ -10,6 +10,7 @@ import javax.ws.rs.core.MediaType;
 
 import com.footscout.rest.db.PlayerDAO;
 import com.footscout.rest.model.Player;
+import com.footscout.rest.model.PlayerKPI;
 
 @Path("/players")
 public class PlayerResource {
@@ -28,6 +29,12 @@ public class PlayerResource {
 	public Player findStatById(@PathParam("id") String id){
 		return dao.findById(Integer.parseInt(id));
 	} 
+	
+	@GET @Path("{id}/similar")
+	@Produces({MediaType.APPLICATION_XML})
+	public List<PlayerKPI> findSimilarPlayerById(@PathParam("id") String id){
+		return PlayerKPI.getSimilarPlayers(Integer.parseInt(id));
+	}
 	
 	@GET @Path("/abc")
 	@Produces("text/plain")

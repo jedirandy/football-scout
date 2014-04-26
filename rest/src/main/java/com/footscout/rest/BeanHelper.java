@@ -32,12 +32,14 @@ public class BeanHelper {
 		}
 	}
 	
+	// Convert camel case to underscore case
 	public String camelToUnderscore(String s){
 		String regex = "([a-z0-9])([A-Z])";
 		String rep = "$1_$2";
 		return s.replaceAll(regex, rep).toLowerCase();
 	}
 	
+	// Capitalize the first letter
 	public String capitalizeFirstLetter(String s){
 		return s.substring(0,1).toUpperCase()+s.substring(1);
 	}
